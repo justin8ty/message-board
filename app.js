@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const links = [
   { href: "/", text: "Home" },
-  { href: "new", text: "New" },
+  { href: "new", text: "Send a New Message" },
 ];
 
 const messages = [
@@ -43,19 +43,19 @@ app.get("/", (req, res) => {
 });
 
 app.get("/new", (req, res) => {
-  res.render("new");
+  res.render("form", { title: "Send a New Message: " });
 });
 
 app.post("/new", (req, res) => {
-  const { message } = req.body;
-  if (message) {
+  const { name, message } = req.body;
+  if (name && message) {
     messages.push({
       text: message,
-      user: "Hermes",
+      user: name,
       added: new Date(),
     });
   }
-  console.log(`New message: ${message}`);
+  console.log(`New msg -> ${name}: ${message}`);
   res.redirect("/");
 });
 

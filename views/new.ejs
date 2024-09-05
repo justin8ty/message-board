@@ -3,14 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New</title>
+    <title><%= title %></title>
   </head>
   <body>
-    <form action="/new" method="post">
-      <label for="Message"></label>
-      <input type="text" id="message" name="message" required />
-      <button type="submit">Submit</button>
-      <a href="/">Return to Index</a>
-    </form>
+    <h1><%= title %></h1>
   </body>
 </html>
