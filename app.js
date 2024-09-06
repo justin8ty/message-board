@@ -21,18 +21,22 @@ const links = [
 
 const messages = [
   {
+    id: 1,
     text: "Hi there!",
     user: "Amando",
     added: new Date(),
   },
   {
+    id: 2,
     text: "Hello World!",
     user: "Charles",
     added: new Date(),
   },
 ];
 
-// logic
+// routes and logic
+
+let nextId = messages.length + 1;
 
 app.get("/", (req, res) => {
   res.render("index", {
@@ -47,16 +51,30 @@ app.get("/new", (req, res) => {
 });
 
 app.post("/new", (req, res) => {
-  const { name, message } = req.body;
-  if (name && message) {
+  const { name, msg } = req.body;
+  if (name && msg) {
     messages.push({
-      text: message,
+      id: nextId++,
+      text: msg,
       user: name,
       added: new Date(),
     });
+
+    console.log(`New msg -> ${name}: ${msg}`);
+    res.redirect("/");
+  } else {
+    res.status(404).send("Uh-oh, message does not exist.");
   }
-  console.log(`New msg -> ${name}: ${message}`);
-  res.redirect("/");
+});
+
+app.get("/message/:id", (req, res) => {
+  const messageId = parseInt(req.params.id);
+  const message = messages.find((msg) => msg.id === messageId);
+  if (message) {
+    res.render("message", { title: "Message Details", message });
+  } else {
+    res.status(404).send("Uh-oh, message does not exist.");
+  }
 });
 
 app.listen(PORT, () => {

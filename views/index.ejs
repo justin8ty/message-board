@@ -20,7 +20,8 @@
       <% messages.forEach(message => { %>
       <div>
         <%= message.user %>: <%= message.text %> <br />
-        Added on: <%= message.added.toDateString() %>
+        Added on: <%= message.added.toDateString() %> <br />
+        <a href="/message/<%= message.id %>">Open</a>
       </div>
       <hr />
       <% }); %>
