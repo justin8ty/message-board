@@ -2,6 +2,8 @@
 
 This project uses Express, EJS, Tailwind.
 
+![](./localhost_3000_.png)
+
 ```
 npm init -y
 npm install express ejs
